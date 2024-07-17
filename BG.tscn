@@ -1,0 +1,172 @@
+[gd_scene load_steps=12 format=3 uid="uid://co8e8hxm6i7cv"]
+
+[ext_resource type="Texture2D" uid="uid://beth186o5v71c" path="res://Assets/sunny-land-phaser-project/sunny-land/assets/environment/back.png" id="1_sskn7"]
+[ext_resource type="Script" path="res://BG.gd" id="1_x4fka"]
+[ext_resource type="Texture2D" uid="uid://bitkiypjv3u2d" path="res://Assets/sunny-land-phaser-project/sunny-land/assets/environment/middle.png" id="2_n1u3p"]
+[ext_resource type="Texture2D" uid="uid://c4jwuuhpnrcmf" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/eagle/eagle-attack-1.png" id="3_ea670"]
+[ext_resource type="Texture2D" uid="uid://bul0xbe3rtnid" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/eagle/eagle-attack-2.png" id="4_mgpof"]
+[ext_resource type="Texture2D" uid="uid://c6pljd0x870wo" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/eagle/eagle-attack-3.png" id="5_wclgd"]
+[ext_resource type="Texture2D" uid="uid://bkqplhkg6rx80" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/eagle/eagle-attack-4.png" id="6_y1sv0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_as1uj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ea670")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mgpof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wclgd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_y1sv0")
+}],
+"loop": true,
+"name": &"Eagle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_74soc"]
+resource_name = "Eagle"
+length = 0.82
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Eagle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:sprite_frames")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("SpriteFrames_as1uj")]
+}
+
+[sub_resource type="Animation" id="Animation_qnk0i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Eagle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:sprite_frames")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("SpriteFrames_as1uj")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x805e"]
+_data = {
+"Eagle": SubResource("Animation_74soc"),
+"RESET": SubResource("Animation_qnk0i")
+}
+
+[node name="ParallaxBackgroundBG" type="ParallaxBackground"]
+script = ExtResource("1_x4fka")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1148, 0)
+
+[node name="Back" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(574, 322)
+scale = Vector2(2.98958, 2.69167)
+texture = ExtResource("1_sskn7")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1148, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxLayer3"]
+position = Vector2(689, 186)
+sprite_frames = SubResource("SpriteFrames_as1uj")
+animation = &"Eagle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxLayer3/AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_x805e")
+}
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(1148, 0)
+
+[node name="Middle" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(91, 462)
+texture = ExtResource("2_n1u3p")
+
+[node name="Middle2" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(251, 466)
+texture = ExtResource("2_n1u3p")
+
+[node name="Middle3" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(403, 464)
+texture = ExtResource("2_n1u3p")
+
+[node name="Middle5" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(568, 465)
+texture = ExtResource("2_n1u3p")
+
+[node name="Middle6" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(743, 462)
+texture = ExtResource("2_n1u3p")
+
+[node name="Middle7" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(891, 465)
+texture = ExtResource("2_n1u3p")
+
+[node name="Middle8" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(1064, 461)
+texture = ExtResource("2_n1u3p")

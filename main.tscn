@@ -1,0 +1,120 @@
+[gd_scene load_steps=11 format=3 uid="uid://dns7axuycuu4f"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_h2c8s"]
+[ext_resource type="Script" path="res://BG.gd" id="2_81ep3"]
+[ext_resource type="Texture2D" uid="uid://beth186o5v71c" path="res://Assets/sunny-land-phaser-project/sunny-land/assets/environment/back.png" id="3_45q70"]
+[ext_resource type="Texture2D" uid="uid://djwty130s3cgp" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/eagle-attack.png" id="4_37krv"]
+[ext_resource type="Texture2D" uid="uid://bitkiypjv3u2d" path="res://Assets/sunny-land-phaser-project/sunny-land/assets/environment/middle.png" id="8_kgpdi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsa03"]
+atlas = ExtResource("4_37krv")
+region = Rect2(0, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6asf"]
+atlas = ExtResource("4_37krv")
+region = Rect2(40, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpgqr"]
+atlas = ExtResource("4_37krv")
+region = Rect2(80, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_id2hp"]
+atlas = ExtResource("4_37krv")
+region = Rect2(120, 0, 40, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_as1uj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsa03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6asf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gpgqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_id2hp")
+}],
+"loop": true,
+"name": &"Eagle",
+"speed": 5.0
+}]
+
+[node name="Main" type="Node2D"]
+position = Vector2(104, -182)
+script = ExtResource("1_h2c8s")
+
+[node name="ParallaxBackgroundBG" type="ParallaxBackground" parent="."]
+script = ExtResource("2_81ep3")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackgroundBG"]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1148, 0)
+
+[node name="Back" type="Sprite2D" parent="ParallaxBackgroundBG/ParallaxLayer"]
+position = Vector2(574, 322)
+scale = Vector2(2.98958, 2.69167)
+texture = ExtResource("3_45q70")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackgroundBG"]
+motion_scale = Vector2(1.44, 1.44)
+motion_mirroring = Vector2(1148, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackgroundBG/ParallaxLayer3"]
+position = Vector2(689, 186)
+sprite_frames = SubResource("SpriteFrames_as1uj")
+animation = &"Eagle"
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackgroundBG"]
+motion_mirroring = Vector2(1148, 0)
+
+[node name="Middle" type="Sprite2D" parent="ParallaxBackgroundBG/ParallaxLayer2"]
+position = Vector2(91, 462)
+texture = ExtResource("8_kgpdi")
+
+[node name="Middle2" type="Sprite2D" parent="ParallaxBackgroundBG/ParallaxLayer2"]
+position = Vector2(251, 466)
+texture = ExtResource("8_kgpdi")
+
+[node name="Middle3" type="Sprite2D" parent="ParallaxBackgroundBG/ParallaxLayer2"]
+position = Vector2(403, 464)
+texture = ExtResource("8_kgpdi")
+
+[node name="Middle5" type="Sprite2D" parent="ParallaxBackgroundBG/ParallaxLayer2"]
+position = Vector2(568, 465)
+texture = ExtResource("8_kgpdi")
+
+[node name="Middle6" type="Sprite2D" parent="ParallaxBackgroundBG/ParallaxLayer2"]
+position = Vector2(743, 462)
+texture = ExtResource("8_kgpdi")
+
+[node name="Middle7" type="Sprite2D" parent="ParallaxBackgroundBG/ParallaxLayer2"]
+position = Vector2(891, 465)
+texture = ExtResource("8_kgpdi")
+
+[node name="Middle8" type="Sprite2D" parent="ParallaxBackgroundBG/ParallaxLayer2"]
+position = Vector2(1064, 461)
+texture = ExtResource("8_kgpdi")
+
+[node name="Play" type="Button" parent="."]
+clip_contents = true
+offset_left = 404.0
+offset_top = 417.0
+offset_right = 558.0
+offset_bottom = 464.0
+text = "Play"
+
+[node name="Quit" type="Button" parent="."]
+clip_contents = true
+offset_left = 404.0
+offset_top = 472.0
+offset_right = 558.0
+offset_bottom = 523.0
+rotation = -0.00886361
+text = "Quit"
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
